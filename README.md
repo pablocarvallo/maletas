@@ -18,3 +18,4 @@ GitHub Pages desde la rama `main`, carpeta raíz: Settings → Pages → Branch 
 - `index.html`: toda la app (estilos, dibujos en SVG y código).
 - `sw.js`: funciona sin conexión.
 - `manifest.webmanifest` e `icons/`: instalación en la pantalla de inicio.
+- **Estampado desde una foto:** en el editor de una maleta, «Usar una foto como estampado»: se elige un recorte de la foto (posición y tamaño) y se aplica cubriendo la maleta o repetido en mosaico. Se guarda solo el recorte, reducido, dentro de los datos de la app (y del respaldo).

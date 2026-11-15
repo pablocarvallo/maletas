@@ -1,5 +1,5 @@
 // Guarda la app para abrirla sin conexión; siempre intenta primero la versión más nueva.
-const CACHE = 'maletas-v2-mochilas';
+const CACHE = 'maletas-v3-foto';
 const ASSETS = [
   './',
   'index.html',

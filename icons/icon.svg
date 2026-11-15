@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Maletas">
+<defs>
+  <linearGradient id="bg" x1="0.1" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#F7E7CC"/><stop offset="1" stop-color="#EBC9A0"/></linearGradient>
+  <linearGradient id="big" x1="0" x2="1"><stop offset="0" stop-color="#5C95EE"/><stop offset=".5" stop-color="#2F6FD6"/><stop offset="1" stop-color="#2352A8"/></linearGradient>
+  <linearGradient id="sm" x1="0" x2="1"><stop offset="0" stop-color="#F8A9C5"/><stop offset="1" stop-color="#E27AA2"/></linearGradient>
+  <pattern id="dots" patternUnits="userSpaceOnUse" width="76" height="76"><circle cx="19" cy="19" r="19" fill="#FF8FB8"/><circle cx="57" cy="57" r="19" fill="#FF8FB8"/></pattern>
+  <clipPath id="clipBig"><rect x="250" y="250" width="420" height="560" rx="64"/></clipPath>
+</defs>
+<rect width="1024" height="1024" fill="url(#bg)"/>
+<ellipse cx="512" cy="905" rx="300" ry="26" fill="#000" opacity=".16"/>
+<!-- maleta grande -->
+<rect x="355" y="110" width="22" height="150" rx="9" fill="#4a4a52"/><rect x="543" y="110" width="22" height="150" rx="9" fill="#4a4a52"/>
+<rect x="335" y="90" width="250" height="38" rx="19" fill="#2e2e35"/><rect x="352" y="97" width="216" height="9" rx="4.5" fill="#fff" opacity=".28"/>
+<rect x="305" y="790" width="70" height="46" rx="14" fill="#33333a"/><rect x="545" y="790" width="70" height="46" rx="14" fill="#33333a"/>
+<circle cx="340" cy="850" r="38" fill="#1c1c21"/><circle cx="340" cy="850" r="15" fill="#8b8b95"/>
+<circle cx="580" cy="850" r="38" fill="#1c1c21"/><circle cx="580" cy="850" r="15" fill="#8b8b95"/>
+<rect x="250" y="250" width="420" height="560" rx="64" fill="url(#big)"/>
+<rect x="250" y="250" width="420" height="560" rx="64" fill="url(#dots)" clip-path="url(#clipBig)"/>
+<g clip-path="url(#clipBig)">
+  <rect x="352" y="300" width="14" height="460" rx="7" fill="#000" opacity=".16"/><rect x="368" y="300" width="5" height="460" fill="#fff" opacity=".3"/>
+  <rect x="453" y="300" width="14" height="460" rx="7" fill="#000" opacity=".16"/><rect x="469" y="300" width="5" height="460" fill="#fff" opacity=".3"/>
+  <rect x="554" y="300" width="14" height="460" rx="7" fill="#000" opacity=".16"/><rect x="570" y="300" width="5" height="460" fill="#fff" opacity=".3"/>
+  <rect x="270" y="262" width="90" height="536" rx="44" fill="#fff" opacity=".12"/>
+</g>
+<rect x="276" y="276" width="368" height="508" rx="44" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="6" stroke-dasharray="7 7"/>
+<rect x="250" y="250" width="420" height="560" rx="64" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="4"/>
+<!-- maleta chica -->
+<rect x="585" y="560" width="26" height="70" rx="10" fill="#4a4a52"/>
+<rect x="560" y="548" width="170" height="30" rx="14" fill="#2e2e35"/>
+<ellipse cx="722" cy="900" rx="120" ry="14" fill="#000" opacity=".2"/>
+<circle cx="640" cy="885" r="24" fill="#1c1c21"/><circle cx="640" cy="885" r="9" fill="#8b8b95"/>
+<circle cx="790" cy="885" r="24" fill="#1c1c21"/><circle cx="790" cy="885" r="9" fill="#8b8b95"/>
+<rect x="600" y="640" width="230" height="240" rx="40" fill="url(#sm)" stroke="#000" stroke-opacity=".3" stroke-width="4"/>
+<rect x="625" y="665" width="180" height="190" rx="26" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="5" stroke-dasharray="6 6"/>
+<rect x="660" y="672" width="8" height="176" rx="4" fill="#000" opacity=".14"/><rect x="715" y="672" width="8" height="176" rx="4" fill="#000" opacity=".14"/><rect x="770" y="672" width="8" height="176" rx="4" fill="#000" opacity=".14"/>
+<rect x="612" y="652" width="52" height="200" rx="26" fill="#fff" opacity=".14"/>
+</svg>

@@ -121,18 +121,6 @@ body.dragging #outbar.show{display:flex}
 .it svg{width:100%;height:100%;display:block}
 .base>.badge{position:absolute}
 .base.tight{box-shadow:inset 0 12px 20px rgba(0,0,0,.32),inset 0 -3px 8px rgba(0,0,0,.2),inset 10px 0 14px rgba(0,0,0,.12),inset -10px 0 14px rgba(0,0,0,.12)}
-.cstrap{position:absolute;left:0;right:0;height:15px;margin-top:-7px;background:linear-gradient(#4a4a52,#34343a);box-shadow:0 3px 5px rgba(0,0,0,.35);z-index:9000;pointer-events:none}
-.cstrap i{position:absolute;left:50%;top:-3px;width:26px;height:21px;margin-left:-13px;border-radius:5px;background:linear-gradient(#f1f1f4,#c9c9d0);border:1px solid rgba(0,0,0,.4)}
-.cstrap i::after{content:"";position:absolute;left:5px;right:5px;top:8px;height:5px;border-radius:2px;background:rgba(0,0,0,.35)}
-.fill{margin:2px auto 12px;max-width:560px}
-.fill .ftop{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--ink2)}
-.fill .ftop b{font-size:20px;color:var(--ink);letter-spacing:-.01em}
-.fill .fbar{height:10px;border-radius:5px;background:rgba(0,0,0,.09);overflow:hidden;margin-top:5px}
-.fill .fbar i{display:block;height:100%;border-radius:5px;background:var(--accent);transition:width .5s}
-.fill.hi .fbar i{background:#E0A526}
-.fill.over .fbar i{background:var(--danger)}
-.fill.over .ftop b{color:var(--danger)}
-.fill small{display:block;margin-top:5px;font-size:12.5px;color:var(--ink2)}
 .inv{max-width:560px;margin:18px auto 0}
 .inv h3{font-size:14px;color:var(--ink2);margin:0 0 6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .inr{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:14px;background:var(--card);margin-bottom:6px;touch-action:pan-y}
@@ -141,7 +129,6 @@ body.dragging #outbar.show{display:flex}
 .inr .tx{flex:1;min-width:0}
 .inr .tx b{display:block;font-size:14.5px}
 .inr .tx small{color:var(--ink2);font-size:12.5px}
-.inr em{font-style:normal;font-weight:700;font-size:13.5px;color:var(--ink2)}
 .it.lift{opacity:.3}
 .it.sc .badge{top:-4px;right:-2px}
 .opening .it{animation:drop .5s cubic-bezier(.2,.9,.3,1.2) both;animation-delay:calc(.55s + var(--d)*.06s)}
@@ -626,7 +613,7 @@ function toast(msg, snap) {
 function cellHTML(c) {
   var n = countIn(c.id), sm = c.size === 'c', chip = '';
   if (sm && c.parent) { var p = caseById(c.parent); if (p) chip = '<i class="chip">en ' + esc(p.name) + '</i>'; }
-  var meta = n === 0 ? 'Vacía' : (n + (n === 1 ? ' cosa' : ' cosas') + ' · ' + fillOf(c).pct + ' %');
+  var meta = n === 0 ? 'Vacía' : (n + (n === 1 ? ' cosa' : ' cosas'));
   return '<div class="cell ' + (sm ? 'sm' : 'lg') + '" data-tap="open:' + c.id + '" data-drop="' + c.id + '"' + (sm ? ' data-drag="case:' + c.id + '"' : '') + '>'
     + '<div class="cs">' + caseSVG(c) + (n ? '<b class="badge">' + n + '</b>' : '') + '</div>'
     + '<span class="nm">' + esc(c.name) + '</span><span class="meta">' + meta + '</span>' + chip + '</div>';
@@ -671,7 +658,6 @@ function packDims(it) {
 }
 function itemVol(it) { var p = packDims(it); return p.w * p.d * p.h * p.f / 1000; }
 function caseVol() { return CASE_PK[0] * CASE_PK[1] * CASE_PK[2] / 1000; }
-function fmtL(v) { return (v < 10 ? v.toFixed(1) : String(Math.round(v))).replace('.', ',') + ' L'; }
 function fillOf(c) {
   var I = INT[c.size], cap = I.w * I.h * I.d / 1000, u = 0;
   itemsIn(c.id).forEach(function (i) { u += itemVol(i); });
@@ -744,23 +730,15 @@ function interiorHTML(c) {
     });
   });
   var lining = mix(c.color, '#F3EEE6', 0.88), ink = lum(c.color) > 0.62 ? '#2A2521' : '#FFFFFF';
-  var straps = F.pct >= 45 ? '<div class="cstrap" style="top:' + Math.round(H * 0.3) + 'px"><i></i></div><div class="cstrap" style="top:' + Math.round(H * 0.7) + 'px"><i></i></div>' : '';
   var empty = (objs.length) ? '' : '<div class="none">Vacía. Toca «Agregar» para guardar cosas aquí.</div>';
   return '<div class="open-case' + (c.img ? ' img' + (c.fit === 'tile' ? ' tile' : '') : (c.dots ? ' dots' : '')) + '" data-drop="' + c.id + '" style="' + (c.img ? "--img:url('" + c.img + "');" : '') + 'width:' + (W + 24) + 'px;--shell:' + c.color + ';--shell-ink:' + ink + ';--dots:' + (c.dots || 'transparent') + ';--lining:' + lining + '">'
     + '<div class="lid-wrap"><div class="lid"><div class="face in"><div class="strap a"></div><div class="strap b"></div><div class="pocket"></div><b class="tag">' + esc(c.name) + '</b></div><div class="face out"></div></div></div>'
-    + '<div class="base' + (F.pct >= 85 ? ' tight' : '') + '" style="height:' + H + 'px">' + els + straps + empty + '</div></div>';
-}
-function fillBarHTML(c) {
-  var F = fillOf(c), lvl = F.pct > 100 || false ? 'over' : (F.pct >= 80 ? 'hi' : 'ok'), w = Math.min(100, F.pct);
-  var I = INT[c.size], ext = EXT[c.size];
-  var msg = F.pct > 100 ? 'Excedida: no cierra (faltan ≈ ' + fmtL(F.used - F.cap) + ')' : (F.pct >= 90 ? 'Casi llena' : (F.pct === 0 ? 'Vacía' : 'Disponible ≈ ' + fmtL(F.cap - F.used)));
-  return '<div class="fill ' + lvl + '"><div class="ftop"><b>' + F.pct + ' %</b><span>' + fmtL(F.used) + ' de ' + fmtL(F.cap) + '</span></div><div class="fbar"><i style="width:' + w + '%"></i></div>'
-    + '<small>' + msg + ' · ' + (c.size === 'g' ? 'Bodega 23 kg' : 'Cabina') + ' ' + ext[0] + '×' + ext[1] + '×' + ext[2] + ' cm</small></div>';
+    + '<div class="base' + (F.pct >= 85 ? ' tight' : '') + '" style="height:' + H + 'px">' + els + empty + '</div></div>';
 }
 function invHTML(c) {
   var rows = [];
-  smallIn(c.id).forEach(function (s) { rows.push({ v: caseVol(), h: '<div class="inr" data-drag="case:' + s.id + '" data-tap="open:' + s.id + '"><span class="th2">' + smallTopSVG(s) + '</span><span class="tx"><b>Maleta chica ' + esc(s.name) + '</b><small>' + countIn(s.id) + ' cosas dentro</small></span><em>' + fmtL(caseVol()) + '</em></div>' }); });
-  itemsIn(c.id).forEach(function (it) { var v = itemVol(it); rows.push({ v: v, h: '<div class="inr" data-drag="item:' + it.id + '" data-tap="item:' + it.id + '"><span class="th2">' + itemSVG(it, 'flat') + '</span><span class="tx"><b>' + esc(itemName(it)) + '</b><small>' + esc(tamLabel(it)) + '</small></span><em>' + fmtL(v) + '</em></div>' }); });
+  smallIn(c.id).forEach(function (s) { rows.push({ v: caseVol(), h: '<div class="inr" data-drag="case:' + s.id + '" data-tap="open:' + s.id + '"><span class="th2">' + smallTopSVG(s) + '</span><span class="tx"><b>Maleta chica ' + esc(s.name) + '</b><small>' + countIn(s.id) + ' cosas dentro</small></span></div>' }); });
+  itemsIn(c.id).forEach(function (it) { var v = itemVol(it); rows.push({ v: v, h: '<div class="inr" data-drag="item:' + it.id + '" data-tap="item:' + it.id + '"><span class="th2">' + itemSVG(it, 'flat') + '</span><span class="tx"><b>' + esc(itemName(it)) + '</b><small>' + esc(tamLabel(it)) + '</small></span></div>' }); });
   if (!rows.length) return '';
   rows.sort(function (a, b) { return b.v - a.v; });
   return '<div class="inv"><h3>Contenido</h3>' + rows.map(function (r) { return r.h; }).join('') + '</div>';
@@ -776,7 +754,7 @@ function renderView(anim) {
   var sum = (nItems + nCases) ? [nItems ? nItems + (nItems === 1 ? ' objeto' : ' objetos') : '', nCases ? nCases + (nCases === 1 ? ' maleta chica' : ' maletas chicas') : ''].filter(Boolean).join(' · ') : '';
   viewEl.innerHTML = '<div class="vhead"><button class="vback" data-act="back">' + IC.back + '<span>' + esc(prev ? prev.name : 'Maletas') + '</span></button>'
     + '<div class="vtitle">' + esc(c.name) + '</div><button class="round" data-act="edit-case" data-arg="' + c.id + '" aria-label="Editar maleta">' + IC.pen + '</button></div>'
-    + '<div class="vbody">' + fillBarHTML(c) + '<div class="' + (anim ? 'opening' : '') + '">' + interiorHTML(c) + '</div><p class="vsum">' + sum + '</p>' + invHTML(c) + '</div>'
+    + '<div class="vbody">' + '<div class="' + (anim ? 'opening' : '') + '">' + interiorHTML(c) + '</div><p class="vsum">' + sum + '</p>' + invHTML(c) + '</div>'
     + '<div class="vbar"><button class="pill" data-act="add-here" data-arg="' + c.id + '">' + IC.plus + 'Agregar</button></div>'
     + '<div id="outbar" data-drop="tray">Soltar aquí para sacar</div>';
   viewEl.classList.add('on'); document.body.classList.add('inview');
@@ -826,7 +804,7 @@ function dzRender(keep) {
   var body = box.querySelector('.sh-body'), sc = keep && body ? body.scrollTop : 0, it = dzItem();
   var sizes = sizeOpts(DZ.cat), c2t = C2_TXT[DZ.cat];
   box.innerHTML = '<div class="sh-head"><button class="lnk" data-act="close">Cancelar</button><h3>' + (DZ.id ? 'Editar diseño' : 'Diseñar') + '</h3><span style="min-width:70px"></span></div>'
-    + '<div class="sh-body"><div class="stage" id="dzstage">' + itemSVG(it, 'flat') + '</div><div class="cap" id="dzcap">' + esc(itemLabel(it)) + ' · ocupa ≈ ' + fmtL(itemVol(it)) + '</div>'
+    + '<div class="sh-body"><div class="stage" id="dzstage">' + itemSVG(it, 'flat') + '</div><div class="cap" id="dzcap">' + esc(itemLabel(it)) + '</div>'
     + seg([['manta', 'Manta'], ['almohada', 'Almohada'], ['cojin', 'Cojín'], ['cuello', 'Cuello'], ['mochila', 'Mochila']], DZ.cat, 'dz-set', 'cat').replace('class="seg"', 'class="seg five"')
     + (TIPO_OPTS[DZ.cat] ? '<div class="lab">Tipo</div>' + seg(TIPO_OPTS[DZ.cat], DZ.tipo, 'dz-set', 'tipo') : '')
     + '<div class="lab">Tamaño</div>' + seg(sizes, DZ.tam, 'dz-set', 'tam')
@@ -837,7 +815,7 @@ function dzRender(keep) {
   var nb = box.querySelector('.sh-body'); if (nb) nb.scrollTop = sc;
   box.style.cssText = 'display:flex;flex-direction:column;min-height:0;flex:1 1 auto;max-height:92vh';
 }
-function dzLive() { var st = $('#dzstage'); if (!st) return; st.innerHTML = itemSVG(dzItem(), 'flat'); $('#dzcap').textContent = itemLabel(dzItem()) + ' · ocupa ≈ ' + fmtL(itemVol(dzItem())); }
+function dzLive() { var st = $('#dzstage'); if (!st) return; st.innerHTML = itemSVG(dzItem(), 'flat'); $('#dzcap').textContent = itemLabel(dzItem()); }
 function dzSave() {
   var it = dzItem();
   if (DZ.id) {

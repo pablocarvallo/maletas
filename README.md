@@ -6,7 +6,7 @@ App web para iPhone que organiza lo que guardas en tus maletas: mantas (quilt, f
 - **Diseñar:** elige qué es (manta, almohada, cojín, cuello o mochila), el tipo, el tamaño, un color principal y, si quieres, otro color para el borde, el broche o los bolsillos. La app dibuja la imagen y la deja en la bandeja.
 - **Guardar:** arrastra un objeto de la bandeja a una maleta. Mantén presionada una maleta chica y arrástrala a una grande. Alternativa sin arrastrar: toca el objeto → «Mover a…», o abre una maleta y toca «Agregar».
 - **Abrir:** toca una maleta; se abre con la tapa hacia arriba y muestra su interior visto desde arriba. Una maleta chica guardada se abre igual, tocándola. Para sacar algo, arrástralo a la barra inferior o tócalo → «Sacar a la bandeja».
-- **Editar maletas:** lápiz dentro de una maleta (nombre, color, lunares, eliminar). El color o el de los lunares se puede tomar de una foto de la galería: «Tomar color de una foto», tocar o arrastrar el dedo sobre la imagen, o elegir uno de los colores que la app detecta. La foto no se guarda, solo el color y Ajustes → «Nueva maleta».
+- **Editar maletas:** lápiz dentro de una maleta (nombre, color, lunares, estampado desde foto, eliminar).
 - **Datos:** solo en el iPhone (`localStorage`, clave `maletas.v1`). Ajustes → «Respaldo de datos» copia y restaura todo como texto.
 
 ## Publicación
@@ -19,3 +19,5 @@ GitHub Pages desde la rama `main`, carpeta raíz: Settings → Pages → Branch 
 - `sw.js`: funciona sin conexión.
 - `manifest.webmanifest` e `icons/`: instalación en la pantalla de inicio.
 - **Estampado desde una foto:** en el editor de una maleta, «Usar una foto como estampado»: se elige un recorte de la foto (posición y tamaño) y se aplica cubriendo la maleta o repetido en mosaico. Se guarda solo el recorte, reducido, dentro de los datos de la app (y del respaldo).
+- **Diseño de objetos desde una foto:** en el diseñador, «Tomar el diseño de una foto» aplica un recorte de la foto como tela del objeto (manta, almohada, cojín, cuello o mochila), cubriendo o en mosaico. Se guarda solo el recorte reducido.
+- **Medidas y ocupación:** la maleta grande (bodega, 23 kg) mide 75×50×30 cm y la chica (cabina) 55×40×20 cm, con interior útil de ≈ 87 L y ≈ 31 L. Cada objeto ocupa una superficie y un volumen estimados (por ejemplo, quilt de 1½ plaza ≈ 15 L, almohada mediana ≈ 14 L, maleta chica guardada ≈ 44 L). El interior se ve desde arriba a escala real: los objetos se acomodan por capas, aparecen correas de compresión desde ≈ 45 % y la barra de ocupación avisa cuando la maleta no cierra (> 100 %). La lista «Contenido» permite tocar o arrastrar objetos que quedan tapados. Las medidas y volúmenes son aproximaciones típicas, no datos de un modelo específico.

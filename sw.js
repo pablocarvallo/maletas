@@ -1,5 +1,5 @@
 // Guarda la app para abrirla sin conexión; siempre intenta primero la versión más nueva.
-const CACHE = 'maletas-v6-visual';
+const CACHE = 'maletas-v7-registro';
 const ASSETS = [
   './',
   'index.html',
